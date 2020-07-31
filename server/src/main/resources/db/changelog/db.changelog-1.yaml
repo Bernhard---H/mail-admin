@@ -1,0 +1,27 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Bernhard Halbartschlager
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: account
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: isSuperAdmin
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
