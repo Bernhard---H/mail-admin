@@ -1,0 +1,18 @@
+version: "3"
+services:
+
+  mysql:
+    image: mariadb:latest
+    ports:
+    - "127.0.0.1:3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vmail
+      MYSQL_USER: vmail
+      MYSQL_PASSWORD: vmail
+    volumes:
+      - database:/var/lib/mysql
+      - ./mysql:/docker-entrypoint-initdb.d
+
+volumes:
+  database:
