@@ -1,0 +1,18 @@
+
+elide:
+  modelPackage: 'at.grub1.mail.admin.models'
+  json-api:
+    path: /api/v1
+    enabled: true
+
+
+spring:
+  jpa:
+    hibernate:
+      show_sql: true
+      dialect: 'org.hibernate.dialect.MySQL5InnoDBDialect'
+  datasource:
+    url: "jdbc:mariadb://localhost:3306/mailadmin"
+    username: vmail
+    password: vmail
+    driver-class-name: 'org.mariadb.jdbc.Driver'
