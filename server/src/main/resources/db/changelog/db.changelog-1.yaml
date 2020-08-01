@@ -5,7 +5,7 @@ databaseChangeLog:
       author: Bernhard Halbartschlager
       changes:
         - createTable:
-            tableName: user
+            tableName: admin_users
             columns:
               - column:
                   name: id
@@ -15,13 +15,90 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: account
-                  type: int
+                  name: display_name
+                  type: varchar(255)
                   constraints:
-                    nullable: false
+                    nullable: true
+                    unique: true
               - column:
                   name: isSuperAdmin
                   type: boolean
                   defaultValueBoolean: false
                   constraints:
                     nullable: false
+
+        - createTable:
+            tableName: admin_users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: display_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+                    unique: true
+              - column:
+                  name: isSuperAdmin
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: admin_users
+            baseColumnNames: account_id
+            constraintName: fk_users_accounts
+            referencedTableName: accounts
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+        - createTable:
+            tableName: admin_roles
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+
+        - createTable:
+            tableName: admin_users_domains
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+
+
+
+        - addForeignKeyConstraint:
+            baseColumnNames: role
+            baseTableName: user
+            constraintName: fk_user_role
+            referencedColumnNames: id
+            referencedTableName: role
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+

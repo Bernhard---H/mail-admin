@@ -4,17 +4,29 @@ elide:
   json-api:
     path: /api/v1
     enabled: true
+  graphql:
+    enabled: false
+  swagger:
+    path: /api/doc
+    enabled: true
+    version: "1.0"
+
 
 
 spring:
   liquibase:
     enabled: true
+    labels: catch_all
   jpa:
     hibernate:
       show_sql: true
       dialect: 'org.hibernate.dialect.MySQL5InnoDBDialect'
   datasource:
-    url: "jdbc:mariadb://localhost:3306/mailadmin"
-    username: mailadmin
-    password: mailadmin
+    url: "jdbc:mariadb://localhost:3306/vmail"
+    username: vmail
+    password: vmail
     driver-class-name: 'org.mariadb.jdbc.Driver'
+
+logging:
+  level:
+    liquibase: info

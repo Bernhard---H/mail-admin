@@ -1,0 +1,13 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: 0
+      author: Bernhard Halbartschlager
+      comment: Enable the catch all feature on the database side
+      labels:
+        - catch_all
+      changes:
+        - dropNotNullConstraint:
+            tableName: aliases
+            columnName: source_username
+            columnDataType: varchar(64)
